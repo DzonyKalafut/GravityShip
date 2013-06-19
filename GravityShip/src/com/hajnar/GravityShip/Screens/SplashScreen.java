@@ -21,14 +21,14 @@ public class SplashScreen
   public SplashScreen(Game game)
   {
     Gdx.input.setInputProcessor(this);
-    this.splashSprite = new Sprite(Assets.splashScreenTexture);
-    this.splashSprite.setSize(1.0F, this.splashSprite.getHeight() / this.splashSprite.getWidth());
-    this.splashSprite.setOrigin(this.splashSprite.getWidth() / 2.0F, this.splashSprite.getHeight() / 2.0F);
-    this.splashSprite.setPosition(-0.5F, -0.5F);
+    splashSprite = new Sprite(Assets.splashScreenTexture);
+    splashSprite.setSize(1.0F, splashSprite.getHeight() / splashSprite.getWidth());
+    splashSprite.setOrigin(splashSprite.getWidth() / 2.0F, splashSprite.getHeight() / 2.0F);
+    splashSprite.setPosition(-0.5F, -0.5F);
 
-    this.batch = new SpriteBatch();
+    batch = new SpriteBatch();
     this.game = game;
-    this.camera = new OrthographicCamera(1.0F, Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
+    camera = new OrthographicCamera(1.0F, Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
   }
 
   public void render(float delta)
@@ -36,10 +36,10 @@ public class SplashScreen
     Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
     Gdx.gl.glClear(16384);
 
-    this.batch.setProjectionMatrix(this.camera.combined);
-    this.batch.begin();
-    this.splashSprite.draw(this.batch);
-    this.batch.end();
+    batch.setProjectionMatrix(camera.combined);
+    batch.begin();
+    splashSprite.draw(batch);
+    batch.end();
   }
 
   public void resize(int width, int height)
@@ -73,7 +73,7 @@ public class SplashScreen
   {
     Assets.playSound(Assets.buttonClickSound);
     Assets.vibrate(40);
-    this.game.setScreen(GravityShip.menuScreen);
+    game.setScreen(GravityShip.menuScreen);
     return true;
   }
 
@@ -91,7 +91,7 @@ public class SplashScreen
   {
     Assets.playSound(Assets.buttonClickSound);
     Assets.vibrate(40);
-    this.game.setScreen(GravityShip.menuScreen);
+    game.setScreen(GravityShip.menuScreen);
     return true;
   }
 
