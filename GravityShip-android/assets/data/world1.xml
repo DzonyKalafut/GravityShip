@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<level>
+	<level_definition>
+		<player_fuel_ammount>200</player_fuel_ammount>
+		<gravity_x>0</gravity_x>
+		<gravity_y>-2</gravity_y>		
+		<canons_fire_interval>2</canons_fire_interval>
+		<terrain_file>world1_terrain.obj2d</terrain_file>
+	</level_definition>
+	<objects>
+		<object type="LandingZone" subtype="Start">
+			<x>0</x>
+			<y>-0.95</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="LandingZone" subtype="Finish">
+			<x>10</x>
+			<y>-0.8</y>
+			<rotation>1</rotation>
+		</object>
+		<object type="Canon">
+			<x>5</x>
+			<y>-1.2</y>
+			<rotation>0</rotation>
+		</object>		
+		<object type="Star">
+			<x>-4.7</x>
+			<y>2</y>
+		</object>
+	</objects>
+</level>

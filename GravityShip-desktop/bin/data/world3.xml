@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<level>
+	<level_definition>
+		<player_fuel_ammount>1777</player_fuel_ammount>
+		<gravity_x>0</gravity_x>
+		<gravity_y>-1.5</gravity_y>
+		<canons_fire_interval>1.5</canons_fire_interval>
+		<terrain_file>world3_terrain.obj2d</terrain_file>
+	</level_definition>
+	<objects>
+		<object type="LandingZone" subtype="Start">
+			<x>0</x>
+			<y>-1</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="LandingZone" subtype="Refuel">
+			<x>98</x>
+			<y>8.3</y>
+			<rotation>1</rotation>
+		</object>
+		<object type="LandingZone" subtype="Finish">
+			<x>136</x>
+			<y>-4.60</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="Canon">
+			<x>10</x>
+			<y>-22</y>
+			<rotation>240</rotation>
+		</object>
+		<object type="Canon">
+			<x>15.1</x>
+			<y>-22</y>
+			<rotation>120</rotation>
+		</object>
+		<object type="Canon">
+			<x>10</x>
+			<y>-25</y>
+			<rotation>300</rotation>
+		</object>
+		<object type="Canon">
+			<x>15.1</x>
+			<y>-25</y>
+			<rotation>60</rotation>
+		</object>
+		<object type="Canon">
+			<x>64</x>
+			<y>-28.4</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="Canon">
+			<x>71.5</x>
+			<y>6</y>
+			<rotation>-90</rotation>
+		</object>
+		<object type="Canon">
+			<x>167</x>
+			<y>-11</y>
+			<rotation>45</rotation>
+		</object>
+		<object type="BlackHole">
+			<x>28</x>
+			<y>10.5</y>
+			<strength>40</strength>
+		</object>
+		<object type="BlackHole">
+			<x>10.5</x>
+			<y>6.5</y>
+			<strength>45</strength>
+		</object>
+		<object type="BlackHole">
+			<x>123</x>
+			<y>6</y>
+			<strength>70</strength>
+		</object>
+		<object type="Star">
+			<x>10</x>
+			<y>4</y>
+		</object>
+		<object type="Star">
+			<x>30</x>
+			<y>9</y>
+		</object>
+		<object type="Star">
+			<x>136</x>
+			<y>-4</y>
+		</object>
+		<object type="Star">
+			<x>118</x>
+			<y>6</y>
+		</object>
+		<object type="Star">
+			<x>162</x>
+			<y>0</y>
+		</object>
+	</objects>
+</level>

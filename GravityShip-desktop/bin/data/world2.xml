@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<level>
+	<level_definition>
+		<player_fuel_ammount>1000</player_fuel_ammount>
+		<gravity_x>0</gravity_x>
+		<gravity_y>-2</gravity_y>		
+		<canons_fire_interval>1.5</canons_fire_interval>
+		<terrain_file>world2_terrain.obj2d</terrain_file>
+	</level_definition>
+	<objects>
+		<object type="LandingZone" subtype="Start">
+			<x>0</x>
+			<y>-0.95</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="LandingZone" subtype="Finish">
+			<x>35</x>
+			<y>98.53</y>
+			<rotation>2</rotation>
+		</object>
+		<object type="LandingZone" subtype="Refuel">
+			<x>-10</x>
+			<y>78.7</y>
+			<rotation>-2</rotation>
+		</object>
+		<object type="Canon">
+			<x>-17.2</x>
+			<y>16</y>
+			<rotation>90</rotation>
+		</object>
+		<object type="Canon">
+			<x>-55.5</x>
+			<y>55.8</y>
+			<rotation>-60</rotation>
+		</object>
+		<object type="Canon">
+			<x>-22</x>
+			<y>78.5</y>
+			<rotation>0</rotation>
+		</object>
+		<object type="Canon">
+			<x>-14</x>
+			<y>83.5</y>
+			<rotation>180</rotation>
+		</object>
+		<object type="Canon">
+			<x>34</x>
+			<y>90</y>
+			<rotation>90</rotation>
+		</object>
+		<object type="Canon">
+			<x>28</x>
+			<y>95</y>
+			<rotation>-90</rotation>
+		</object>
+		<object type="Star">
+			<x>-20</x>
+			<y>30</y>
+		</object>
+		<object type="Star">
+			<x>-63</x>
+			<y>75</y>
+		</object>
+		<object type="Star">
+			<x>29</x>
+			<y>93</y>
+		</object>
+	</objects>
+</level>
