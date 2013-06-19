@@ -36,25 +36,26 @@ public class GameWorldRenderGL2 extends GameWorldRender
 
     ShaderProgram.pedantic = false;
 
-    this.fbo1 = new FrameBuffer(Format.RGBA8888, 1200, (int)Helper.WINDOW_HEIGHT, false);
-    this.fbo2 = new FrameBuffer(Format.RGBA8888, 256, 256, false);
-    this.fbo3 = new FrameBuffer(Format.RGBA8888, 256, 256, false);
-    this.fboRegion = new TextureRegion(this.fbo1.getColorBufferTexture());
-    this.fboRegion.flip(false, true);
+    fbo1 = new FrameBuffer(Format.RGBA8888, 1200, (int)Helper.WINDOW_HEIGHT, false);
+    fbo2 = new FrameBuffer(Format.RGBA8888, FBO_SIZE, FBO_SIZE, false);
+    fbo3 = new FrameBuffer(Format.RGBA8888, FBO_SIZE, FBO_SIZE, false);
+    fboRegion = new TextureRegion(fbo1.getColorBufferTexture());
+    fboRegion.flip(false, true);
 
-    this.terrainShader = new ShaderProgram(Assets.terrainVertexShader, Assets.terrainFragmentShader);
-    this.hiPassShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.hiPassFragmentShader);
-    this.blurShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.blurFragmentShader);
-    if (this.terrainShader.getLog().length() != 0)
-      System.out.println("terrainShader: " + this.terrainShader.getLog());
-    if (this.hiPassShader.getLog().length() != 0)
-      System.out.println("hiPassShader: " + this.hiPassShader.getLog());
-    if (this.blurShader.getLog().length() != 0) {
-      System.out.println("blurShader: " + this.terrainShader.getLog());
+    terrainShader = new ShaderProgram(Assets.terrainVertexShader, Assets.terrainFragmentShader);
+    hiPassShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.hiPassFragmentShader);
+    blurShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.blurFragmentShader);
+    if (terrainShader.getLog().length() != 0)
+      System.out.println("terrainShader: " + terrainShader.getLog());
+    if (hiPassShader.getLog().length() != 0)
+      System.out.println("hiPassShader: " + hiPassShader.getLog());
+    if (blurShader.getLog().length() != 0) {
+      System.out.println("blurShader: " + terrainShader.getLog());
     }
-    this.blurShader.setUniformf("dir", 0.0F, 0.0F);
-    this.blurShader.setUniformf("resolution", 256.0F);
-    this.blurShader.setUniformf("radius", 1.0F);
+    
+    blurShader.setUniformf("dir", 0.0f, 0.0f);
+    blurShader.setUniformf("resolution", FBO_SIZE);
+    blurShader.setUniformf("radius", 1.0f);
   }
 
   public GameWorldRenderGL2(GameWorld world, SpriteBatch batch, boolean debug)
@@ -63,177 +64,177 @@ public class GameWorldRenderGL2 extends GameWorldRender
 
     ShaderProgram.pedantic = false;
 
-    this.fbo1 = new FrameBuffer(Format.RGBA8888, 1200, (int)Helper.WINDOW_HEIGHT, false);
-    this.fbo2 = new FrameBuffer(Format.RGBA8888, 256, 256, false);
-    this.fbo3 = new FrameBuffer(Format.RGBA8888, 256, 256, false);
-    this.fboRegion = new TextureRegion(this.fbo1.getColorBufferTexture());
-    this.fboRegion.flip(false, true);
+    fbo1 = new FrameBuffer(Format.RGBA8888, 1200, (int) Helper.WINDOW_HEIGHT, false);
+    fbo2 = new FrameBuffer(Format.RGBA8888, FBO_SIZE, FBO_SIZE, false);
+    fbo3 = new FrameBuffer(Format.RGBA8888, FBO_SIZE, FBO_SIZE, false);
+    fboRegion = new TextureRegion(fbo1.getColorBufferTexture());
+    fboRegion.flip(false, true);
 
-    this.terrainShader = new ShaderProgram(Assets.terrainVertexShader, Assets.terrainFragmentShader);
-    this.hiPassShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.hiPassFragmentShader);
-    this.blurShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.blurFragmentShader);
-    if (this.terrainShader.getLog().length() != 0)
-      System.out.println("terrainShader: " + this.terrainShader.getLog());
-    if (this.hiPassShader.getLog().length() != 0)
-      System.out.println("hiPassShader: " + this.hiPassShader.getLog());
-    if (this.blurShader.getLog().length() != 0) {
-      System.out.println("blurShader: " + this.terrainShader.getLog());
+    terrainShader = new ShaderProgram(Assets.terrainVertexShader, Assets.terrainFragmentShader);
+    hiPassShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.hiPassFragmentShader);
+    blurShader = new ShaderProgram(Assets.hiPassVertexShader, Assets.blurFragmentShader);
+    if (terrainShader.getLog().length() != 0)
+      System.out.println("terrainShader: " + terrainShader.getLog());
+    if (hiPassShader.getLog().length() != 0)
+      System.out.println("hiPassShader: " + hiPassShader.getLog());
+    if (blurShader.getLog().length() != 0) {
+      System.out.println("blurShader: " + terrainShader.getLog());
     }
-    this.blurShader.setUniformf("dir", 0.0F, 0.0F);
-    this.blurShader.setUniformf("resolution", 256.0F);
-    this.blurShader.setUniformf("radius", 1.0F);
+    blurShader.setUniformf("dir", 0.0f, 0.0f);
+    blurShader.setUniformf("resolution", FBO_SIZE);
+    blurShader.setUniformf("radius", 1.0f);
   }
 
   public void render(float delta)
   {
-    if (this.world.getState() == 1)
+    if (world.getState() == GameWorld.WORLD_RUNNING)
     {
       Vector2 cameraTranslation;
-      if (GravityShip.deviceType == 2)
-        cameraTranslation = this.camera.followWithZooming(this.world.getPlayer());
+      if (GravityShip.deviceType == GravityShip.DEV_TYPE_ANDROID)
+        cameraTranslation = camera.followWithZooming(world.getPlayer());
       else
-        cameraTranslation = this.camera.follow(this.world.getPlayer());
-      this.parallaxCamera.translate(cameraTranslation.mul(0.1F));
-      this.parallaxCamera2.translate(cameraTranslation.mul(0.3F));
+        cameraTranslation = camera.follow(world.getPlayer());
+      parallaxCamera.translate(cameraTranslation.mul(0.1f));
+      parallaxCamera2.translate(cameraTranslation.mul(0.3f));
     }
-    this.camera.update();
-    this.parallaxCamera.update();
-    this.parallaxCamera2.update();
-    this.gasTexture.updateBackground();
-    this.gasTexture2.updateBackground();
+    camera.update();
+    parallaxCamera.update();
+    parallaxCamera2.update();
+    gasTexture.updateBackground();
+    gasTexture2.updateBackground();
 
-    this.batch.begin();
-    this.fbo1.begin();
-    Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
+    batch.begin();
+    fbo1.begin();
+    Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     Gdx.gl.glClear(16384);
-    this.batch.disableBlending();
-    this.batch.setProjectionMatrix(this.staticCamera.combined);
-    this.batch.draw(Assets.backgroundTexture, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, 1200.0F);
-    this.batch.enableBlending();
-    this.batch.setProjectionMatrix(this.parallaxCamera.combined);
-    this.gasTexture.render();
-    this.batch.setProjectionMatrix(this.parallaxCamera2.combined);
-    this.gasTexture2.render();
-    this.batch.setProjectionMatrix(this.camera.combined);
+    batch.disableBlending();
+    batch.setProjectionMatrix(staticCamera.combined);
+    batch.draw(Assets.backgroundTexture, -Helper.FRUSTUM_WIDTH / 2, -Helper.FRUSTUM_HEIGHT / 2, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_WIDTH);
+    batch.enableBlending();
+    batch.setProjectionMatrix(parallaxCamera.combined);
+    gasTexture.render();
+    batch.setProjectionMatrix(parallaxCamera2.combined);
+    gasTexture2.render();
+    batch.setProjectionMatrix(camera.combined);
     renderBlackHoles();
     renderStars();
     renderParticles(delta);
     renderLandingZones();
     renderPlayer();
     renderBullets();
-    this.batch.end();
+    batch.end();
     renderTerrain();
-    this.batch.begin();
+    batch.begin();
     renderCanons();
-    this.batch.end();
-    this.fbo1.end();
+    batch.end();
+    fbo1.end();
 
-    if ((this.world.getState() == GameWorld.WORLD_RUNNING) || ((this.world.getState() == GameWorld.WORLD_GAME_OVER) && (GravityShip.gameScreen.getGameOverDuration() <= 1.5f)))
+    if ((world.getState() == GameWorld.WORLD_RUNNING) || ((world.getState() == GameWorld.WORLD_GAME_OVER) && (GravityShip.gameScreen.getGameOverDuration() <= 1.5f)))
     {
-      this.fboRegion.setTexture(this.fbo1.getColorBufferTexture());
+      fboRegion.setTexture(fbo1.getColorBufferTexture());
 
-      this.batch.begin();
-      this.fbo2.begin();
-      this.batch.setShader(this.hiPassShader);
-      this.hiPassShader.setUniformf("brightPassThreshold", 0.47F);
+      batch.begin();
+      fbo2.begin();
+      batch.setShader(hiPassShader);
+      hiPassShader.setUniformf("brightPassThreshold", 0.47F);
       Gdx.gl.glClear(16384);
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.flush();
-      this.fbo2.end();
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.flush();
+      fbo2.end();
 
-      this.fboRegion.setTexture(this.fbo2.getColorBufferTexture());
+      fboRegion.setTexture(fbo2.getColorBufferTexture());
 
-      this.fbo3.begin();
-      this.batch.setShader(this.blurShader);
-      this.blurShader.setUniformf("dir", 1.0F, 0.0F);
-      this.blurShader.setUniformf("resolution", 256.0F);
-      this.blurShader.setUniformf("radius", 1.5F);
+      fbo3.begin();
+      batch.setShader(blurShader);
+      blurShader.setUniformf("dir", 1.0F, 0.0F);
+      blurShader.setUniformf("resolution", 256.0F);
+      blurShader.setUniformf("radius", 1.5F);
       Gdx.gl.glClear(16384);
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.flush();
-      this.fbo3.end();
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.flush();
+      fbo3.end();
 
-      this.batch.setShader(null);
+      batch.setShader(null);
       Gdx.gl.glClear(16384);
-      this.batch.setBlendFunction(770, 1);
+      batch.setBlendFunction(770, 1);
 
-      this.fboRegion.setTexture(this.fbo1.getColorBufferTexture());
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.setColor(1.0F, 1.0F, 1.0F, 0.7F);
-      this.fboRegion.setTexture(this.fbo3.getColorBufferTexture());
-      this.batch.setShader(this.blurShader);
-      this.blurShader.setUniformf("dir", 0.0F, 1.0F);
-      this.blurShader.setUniformf("resolution", 256.0F);
-      this.blurShader.setUniformf("radius", 1.5F);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.setBlendFunction(770, 771);
-      this.batch.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-      this.batch.setShader(null);
-      this.batch.end();
+      fboRegion.setTexture(fbo1.getColorBufferTexture());
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.setColor(1.0F, 1.0F, 1.0F, 0.7F);
+      fboRegion.setTexture(fbo3.getColorBufferTexture());
+      batch.setShader(blurShader);
+      blurShader.setUniformf("dir", 0.0F, 1.0F);
+      blurShader.setUniformf("resolution", 256.0F);
+      blurShader.setUniformf("radius", 1.5F);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.setBlendFunction(770, 771);
+      batch.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+      batch.setShader(null);
+      batch.end();
     }
     else
     {
-      this.fboRegion.setTexture(this.fbo1.getColorBufferTexture());
+      fboRegion.setTexture(fbo1.getColorBufferTexture());
 
-      this.batch.begin();
-      this.fbo2.begin();
+      batch.begin();
+      fbo2.begin();
       Gdx.gl.glClear(16384);
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.flush();
-      this.fbo2.end();
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.flush();
+      fbo2.end();
 
-      this.fboRegion.setTexture(this.fbo2.getColorBufferTexture());
-      this.fbo3.begin();
-      this.batch.setShader(this.blurShader);
-      this.blurShader.setUniformf("dir", 1.0F, 0.0F);
-      this.blurShader.setUniformf("resolution", 256.0F);
-      this.blurShader.setUniformf("radius", 1.7F);
+      fboRegion.setTexture(fbo2.getColorBufferTexture());
+      fbo3.begin();
+      batch.setShader(blurShader);
+      blurShader.setUniformf("dir", 1.0F, 0.0F);
+      blurShader.setUniformf("resolution", 256.0F);
+      blurShader.setUniformf("radius", 1.7F);
       Gdx.gl.glClear(16384);
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.flush();
-      this.fbo3.end();
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.flush();
+      fbo3.end();
 
-      this.fboRegion.setTexture(this.fbo3.getColorBufferTexture());
-      this.blurShader.setUniformf("dir", 0.0F, 1.0F);
-      this.batch.setProjectionMatrix(this.staticCamera.combined);
-      this.batch.draw(this.fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
-      this.batch.setShader(null);
-      this.batch.end();
+      fboRegion.setTexture(fbo3.getColorBufferTexture());
+      blurShader.setUniformf("dir", 0.0F, 1.0F);
+      batch.setProjectionMatrix(staticCamera.combined);
+      batch.draw(fboRegion, -600.0F, -Helper.FRUSTUM_HEIGHT / 2.0F, 1200.0F, Helper.FRUSTUM_HEIGHT);
+      batch.setShader(null);
+      batch.end();
     }
 
 
-    if (this.debugEnabled) {
+    if (debugEnabled) {
       renderBox2DDebug();
     }
-    this.fpsLogger.log();
+    fpsLogger.log();
   }
 
   public void renderTerrain()
   {
-    this.terrainShader.begin();
-    this.terrainShader.setUniformi("u_texture", 0);
-    this.terrainShader.setUniformMatrix("u_projectionViewMatrix", this.camera.combined);
+    terrainShader.begin();
+    terrainShader.setUniformi("u_texture", 0);
+    terrainShader.setUniformMatrix("u_projectionViewMatrix", camera.combined);
 
     Assets.terrainTexture.bind();
 
-    for (int i = 0; i < this.world.getTerrain().getMeshes().size(); i++) {
-      if (this.camera.frustum.boundsInFrustum((BoundingBox)this.world.getTerrain().getBoundingBoxes().get(i)))
-        ((Mesh)this.world.getTerrain().meshes.get(i)).render(this.terrainShader, 5);
+    for (int i = 0; i < world.getTerrain().getMeshes().size(); i++) {
+      if (camera.frustum.boundsInFrustum((BoundingBox)world.getTerrain().getBoundingBoxes().get(i)))
+        ((Mesh)world.getTerrain().meshes.get(i)).render(terrainShader, 5);
     }
-    this.terrainShader.end();
+    terrainShader.end();
   }
 
   public void dispose()
   {
-    this.terrainShader.dispose();
-    this.hiPassShader.dispose();
-    this.blurShader.dispose();
-    this.fbo1.dispose();
-    this.fbo2.dispose();
+    terrainShader.dispose();
+    hiPassShader.dispose();
+    blurShader.dispose();
+    fbo1.dispose();
+    fbo2.dispose();
   }
 }
