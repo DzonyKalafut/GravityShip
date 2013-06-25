@@ -37,7 +37,7 @@ import com.hajnar.GravityShip.GameWorldRenderGL2;
 import com.hajnar.GravityShip.GravityShip;
 import com.hajnar.GravityShip.Helper;
 
-public class GameScreen implements Screen, InputProcessor, ControllerListener{
+public class GameScreen implements Screen, InputProcessor{
 		
 	public static final boolean DEBUG_RENDER_ENABLED = false;
 	
@@ -62,13 +62,13 @@ public class GameScreen implements Screen, InputProcessor, ControllerListener{
 	public GameScreen(Game game) 
 	{
 		Gdx.input.setInputProcessor(this);
-		connectedController = Controllers.getControllers().first();
-		if (connectedController != null)
-		{
-			Gdx.app.log("Connected controller: ", connectedController + "");
-			if (connectedController.getName().toLowerCase().contains("x-box") && connectedController.getName().toLowerCase().contains("360"))
-				connectedController.addListener(this);
-		}
+//		connectedController = Controllers.getControllers().first();
+//		if (connectedController != null)
+//		{
+//			Gdx.app.log("Connected controller: ", connectedController + "");
+//			if (connectedController.getName().toLowerCase().contains("x-box") && connectedController.getName().toLowerCase().contains("360"))
+//				connectedController.addListener(this);
+//		}
 		
 		this.game = game;
 		gameWorld = new GameWorld();
@@ -501,128 +501,128 @@ public class GameScreen implements Screen, InputProcessor, ControllerListener{
 	}
 	
 //////////////// joystick input ////////////////////
-	@Override
-	public boolean accelerometerMoved(Controller arg0, int arg1, Vector3 arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean axisMoved(Controller arg0, int arg1, float arg2) {
-		if (arg1 == 0)
-		{
-			if (arg2 < -0.2)
-				gameWorld.getPlayer().setRotationRatio(arg2);
-			else if (arg2 > 0.2)
-				gameWorld.getPlayer().setRotationRatio(arg2);
-			else 
-				gameWorld.getPlayer().setRotationRatio(0);
-		}
-		if (arg1 == 5)
-		{
-			if (arg2 > -0.6)
-				gameWorld.getPlayer().thrustOn();
-			else
-				gameWorld.getPlayer().thrustOff();
-		}
-		return true;
-	}
-
-	@Override
-	public boolean buttonDown(Controller arg0, int arg1) {
-		switch(gameWorld.getState())
-		{
-		case GameWorld.WORLD_RUNNING:
-			if (arg1 == 0)
-				gameWorld.getPlayer().thrustOn();
-			if (arg1 == 7)
-			{
-				gameWorld.pause();
-				Gdx.input.setCursorCatched(false);
-			}
-			break;
-		case GameWorld.WORLD_PAUSED:
-			if (arg1 == 7)
-			{
-				gameWorld.resume();
-				Gdx.input.setCursorCatched(true);
-			}
-			if (arg1 == 0)
-			{
-				gameWorld.reset();
-				levelDuration = 0;
-				gameoverDuration = 0;
-				Gdx.input.setCursorCatched(true);
-			}
-			if (arg1 == 1)
-			{
-				game.setScreen(GravityShip.menuScreen);
-				Gdx.input.setCursorCatched(false);
-			}
-			break;
-		case GameWorld.WORLD_GAME_OVER:
-			if (arg1 == 0)
-			{
-				gameWorld.reset();
-				levelDuration = 0;
-				gameoverDuration = 0;
-				Gdx.input.setCursorCatched(true);
-			}
-			if (arg1 == 1)
-				game.setScreen(GravityShip.menuScreen);
-			break;
-		case GameWorld.WORLD_NEXT_LEVEL:
-			if (arg1 == 0 && GravityShip.prefs.getRecentWorld() < GravityShip.prefs.getNumOfWorlds())
-			{
-				GravityShip.prefs.setRecentWorld(GravityShip.prefs.getRecentWorld()+1);
-				gameWorld.loadWorld(GravityShip.prefs.getRecentWorld());
-				gameWorld.reset();
-				levelDuration = 0;
-				gameoverDuration = 0;
-				Gdx.input.setCursorCatched(true);
-			}
-			if(arg1 == 1)
-				game.setScreen(GravityShip.menuScreen);
-			break;
-		}		
-		return true;
-	}
-
-	@Override
-	public boolean buttonUp(Controller arg0, int arg1) {
-		if (arg1 == 0)
-			gameWorld.getPlayer().thrustOff();
-		return false;
-	}
-
-	@Override
-	public void connected(Controller arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void disconnected(Controller arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean povMoved(Controller arg0, int arg1, PovDirection arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean xSliderMoved(Controller arg0, int arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean ySliderMoved(Controller arg0, int arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean accelerometerMoved(Controller arg0, int arg1, Vector3 arg2) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean axisMoved(Controller arg0, int arg1, float arg2) {
+//		if (arg1 == 0)
+//		{
+//			if (arg2 < -0.2)
+//				gameWorld.getPlayer().setRotationRatio(arg2);
+//			else if (arg2 > 0.2)
+//				gameWorld.getPlayer().setRotationRatio(arg2);
+//			else 
+//				gameWorld.getPlayer().setRotationRatio(0);
+//		}
+//		if (arg1 == 5)
+//		{
+//			if (arg2 > -0.6)
+//				gameWorld.getPlayer().thrustOn();
+//			else
+//				gameWorld.getPlayer().thrustOff();
+//		}
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean buttonDown(Controller arg0, int arg1) {
+//		switch(gameWorld.getState())
+//		{
+//		case GameWorld.WORLD_RUNNING:
+//			if (arg1 == 0)
+//				gameWorld.getPlayer().thrustOn();
+//			if (arg1 == 7)
+//			{
+//				gameWorld.pause();
+//				Gdx.input.setCursorCatched(false);
+//			}
+//			break;
+//		case GameWorld.WORLD_PAUSED:
+//			if (arg1 == 7)
+//			{
+//				gameWorld.resume();
+//				Gdx.input.setCursorCatched(true);
+//			}
+//			if (arg1 == 0)
+//			{
+//				gameWorld.reset();
+//				levelDuration = 0;
+//				gameoverDuration = 0;
+//				Gdx.input.setCursorCatched(true);
+//			}
+//			if (arg1 == 1)
+//			{
+//				game.setScreen(GravityShip.menuScreen);
+//				Gdx.input.setCursorCatched(false);
+//			}
+//			break;
+//		case GameWorld.WORLD_GAME_OVER:
+//			if (arg1 == 0)
+//			{
+//				gameWorld.reset();
+//				levelDuration = 0;
+//				gameoverDuration = 0;
+//				Gdx.input.setCursorCatched(true);
+//			}
+//			if (arg1 == 1)
+//				game.setScreen(GravityShip.menuScreen);
+//			break;
+//		case GameWorld.WORLD_NEXT_LEVEL:
+//			if (arg1 == 0 && GravityShip.prefs.getRecentWorld() < GravityShip.prefs.getNumOfWorlds())
+//			{
+//				GravityShip.prefs.setRecentWorld(GravityShip.prefs.getRecentWorld()+1);
+//				gameWorld.loadWorld(GravityShip.prefs.getRecentWorld());
+//				gameWorld.reset();
+//				levelDuration = 0;
+//				gameoverDuration = 0;
+//				Gdx.input.setCursorCatched(true);
+//			}
+//			if(arg1 == 1)
+//				game.setScreen(GravityShip.menuScreen);
+//			break;
+//		}		
+//		return true;
+//	}
+//
+//	@Override
+//	public boolean buttonUp(Controller arg0, int arg1) {
+//		if (arg1 == 0)
+//			gameWorld.getPlayer().thrustOff();
+//		return false;
+//	}
+//
+//	@Override
+//	public void connected(Controller arg0) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void disconnected(Controller arg0) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public boolean povMoved(Controller arg0, int arg1, PovDirection arg2) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean xSliderMoved(Controller arg0, int arg1, boolean arg2) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean ySliderMoved(Controller arg0, int arg1, boolean arg2) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 }
