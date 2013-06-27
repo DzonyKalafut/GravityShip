@@ -13,6 +13,8 @@ public class Main {
 		cfg.title = "GravityShip";
 		cfg.stencil = 0;
 		cfg.useGL20 = true;
+		cfg.useCPUSynch = false;
+		cfg.vSyncEnabled = false;
 		
 		if (args.length >= 2)
 		{
@@ -20,8 +22,6 @@ public class Main {
 			cfg.height = Integer.parseInt(args[1]);
 			if (args.length >= 3)
 				cfg.fullscreen = Boolean.parseBoolean(args[2]);
-				if (args.length == 4)
-					cfg.useGL20 = Boolean.parseBoolean(args[3]);;
 		}
 		else
 		{

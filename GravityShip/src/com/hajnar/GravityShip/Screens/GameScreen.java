@@ -22,17 +22,12 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.ControllerListener;
-import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.hajnar.GravityShip.Assets;
 import com.hajnar.GravityShip.GameWorld;
-import com.hajnar.GravityShip.GameWorldRender;
 import com.hajnar.GravityShip.GameWorldRenderGL2;
 import com.hajnar.GravityShip.GravityShip;
 import com.hajnar.GravityShip.Helper;
@@ -43,7 +38,7 @@ public class GameScreen implements Screen, InputProcessor{
 	
 	private Game game;
 	private GameWorld gameWorld;
-	private GameWorldRender worldRender;
+	private GameWorldRenderGL2 worldRender;
 	private SpriteBatch batch;
 	private OrthographicCamera staticCamera;
 	
@@ -58,6 +53,10 @@ public class GameScreen implements Screen, InputProcessor{
 	StringBuilder stringBuffer;
 	
 	Controller connectedController;
+	
+	private float accum = 0f;               
+	private final float step = 1f / 60f;    
+	private final float maxAccum = 1f / 20f;
 	
 	public GameScreen(Game game) 
 	{
@@ -77,16 +76,10 @@ public class GameScreen implements Screen, InputProcessor{
 		this.staticCamera = new OrthographicCamera(Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
 		this.staticCamera.position.set(Helper.FRUSTUM_WIDTH / 2, Helper.FRUSTUM_HEIGHT / 2, 0);
 		this.staticCamera.update();
-		if (Gdx.graphics.isGL20Available())
-			if (DEBUG_RENDER_ENABLED)
-				this.worldRender = new GameWorldRenderGL2(gameWorld, batch, true);
-			else
-				this.worldRender = new GameWorldRenderGL2(gameWorld, batch, false);
+		if (DEBUG_RENDER_ENABLED)
+			this.worldRender = new GameWorldRenderGL2(gameWorld, batch, true);
 		else
-			if (DEBUG_RENDER_ENABLED)
-				this.worldRender = new GameWorldRender(gameWorld, batch, true);
-			else
-				this.worldRender = new GameWorldRender(gameWorld, batch, false);
+			this.worldRender = new GameWorldRenderGL2(gameWorld, batch, false);
 		
 		restartSprite = new Sprite(Assets.restartRegion);
 		restartSprite.setPosition(Helper.FRUSTUM_WIDTH/2 - restartSprite.getWidth()/2, Helper.FRUSTUM_HEIGHT/2 - restartSprite.getHeight()/2);
@@ -114,7 +107,13 @@ public class GameScreen implements Screen, InputProcessor{
 		
 		if (gameWorld.getState() != GameWorld.WORLD_PAUSED)
 		{
-			gameWorld.update(delta);
+			accum += delta;                     
+			accum = Math.min(accum, maxAccum);  
+			while (accum > step) {   
+				gameWorld.update(delta);       
+			    accum -= step;                  
+			   }  
+//			gameWorld.update(delta);
 		}
 		
 		if (gameWorld.getState()  == GameWorld.WORLD_RUNNING)
@@ -125,7 +124,10 @@ public class GameScreen implements Screen, InputProcessor{
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_STENCIL_BUFFER_BIT);	
 		
-		worldRender.render(delta);
+		if (GravityShip.deviceType == GravityShip.DEV_TYPE_DESKTOP)
+			worldRender.renderDesktop(delta);
+		else
+			worldRender.renderAndroid(delta);
 			
 		switch(gameWorld.getState())
 		{
@@ -211,7 +213,7 @@ public class GameScreen implements Screen, InputProcessor{
 	{
 		batch.begin();	
 		batch.setProjectionMatrix(staticCamera.combined);
-		batch.draw(Assets.gameoverBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
+//		batch.draw(Assets.gameoverBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
 		Assets.gameFont.draw(batch, "Game Over" , Helper.FRUSTUM_WIDTH/2 - 110, Helper.FRUSTUM_HEIGHT - 5);
 		restartSprite.draw(batch);
 		exitSprite.draw(batch);
@@ -222,7 +224,7 @@ public class GameScreen implements Screen, InputProcessor{
 	{
 		batch.begin();	
 		batch.setProjectionMatrix(staticCamera.combined);
-		batch.draw(Assets.succesBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
+//		batch.draw(Assets.succesBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
 		Assets.gameFont.draw(batch, "Level Passed" , Helper.FRUSTUM_WIDTH/2 - 120, Helper.FRUSTUM_HEIGHT - 5);
 		stringBuffer.delete(0, stringBuffer.length());
 		stringBuffer.append("Time: ").append(Math.round(levelDuration));
@@ -238,7 +240,7 @@ public class GameScreen implements Screen, InputProcessor{
 	{
 		batch.begin();	
 		batch.setProjectionMatrix(staticCamera.combined);
-		batch.draw(Assets.pauseBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
+//		batch.draw(Assets.pauseBackground, 0, 0, Helper.FRUSTUM_WIDTH, Helper.FRUSTUM_HEIGHT);
 		Assets.gameFont.draw(batch, "Pause menu" , Helper.FRUSTUM_WIDTH/2 - 110, Helper.FRUSTUM_HEIGHT - 5);
 		resumeSprite.draw(batch);
 		restartSprite.draw(batch);

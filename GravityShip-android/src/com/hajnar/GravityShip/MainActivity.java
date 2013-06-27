@@ -12,7 +12,7 @@ public class MainActivity extends AndroidApplication {
         
         AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
         cfg.stencil = 0;
-        cfg.useGL20 = false;
+        cfg.useGL20 = true;
         cfg.useAccelerometer = false;
         cfg.useCompass = false;
         

@@ -4,39 +4,40 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hajnar.GravityShip.Assets;
 import com.hajnar.GravityShip.GravityShip;
 
-public class SplashScreen
-  implements Screen, InputProcessor
+public class SplashScreen  implements Screen, InputProcessor
 {
   private Game game;
   private SpriteBatch batch;
   private OrthographicCamera camera;
-  Sprite splashSprite;
+  private Sprite splashSprite;
 
   public SplashScreen(Game game)
   {
     Gdx.input.setInputProcessor(this);
     splashSprite = new Sprite(Assets.splashScreenTexture);
-    splashSprite.setSize(1.0F, splashSprite.getHeight() / splashSprite.getWidth());
-    splashSprite.setOrigin(splashSprite.getWidth() / 2.0F, splashSprite.getHeight() / 2.0F);
-    splashSprite.setPosition(-0.5F, -0.5F);
+    splashSprite.setSize(1, splashSprite.getHeight()/splashSprite.getWidth());
+    splashSprite.setOrigin(splashSprite.getWidth()/2, splashSprite.getHeight()/2);
+    splashSprite.setPosition(-0.5f, -0.5f);
 
     batch = new SpriteBatch();
     this.game = game;
-    camera = new OrthographicCamera(1.0F, Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
+    camera = new OrthographicCamera(1, Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
+    camera.update();
+	batch.setProjectionMatrix(camera.combined);
   }
 
   public void render(float delta)
   {
-    Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-    Gdx.gl.glClear(16384);
-
-    batch.setProjectionMatrix(camera.combined);
+    Gdx.gl.glClearColor(1f, 0.0f, 0.0f, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    
     batch.begin();
     splashSprite.draw(batch);
     batch.end();
