@@ -1,13 +1,16 @@
 package com.hajnar.GravityShip;
 
 import aurelienribon.bodyeditor.BodyEditorLoader;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ETC1;
 
 public class Assets
 {
@@ -66,7 +69,10 @@ public class Assets
   public static String blurFragmentShader;
 
   public static void loadAssets()
-  {
+  {    
+	  Pixmap pixmap = new Pixmap(Gdx.files.internal("data/terrain4.png"));
+	  ETC1.encodeImagePKM(pixmap).write(Gdx.files.local("terrain4.etc1"));   
+	    
     if (GravityShip.deviceType == GravityShip.DEV_TYPE_ANDROID)
     {
       buttonsTexture = new Texture(Gdx.files.internal("data/menu_buttons.png"), true);
@@ -74,8 +80,11 @@ public class Assets
 
       gameObjectsTexture = new Texture(Gdx.files.internal("data/game_objects.png"), true);
       gameObjectsTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
-
-      backgroundTexture = new Texture(Gdx.files.internal("data/background_color.png"), true);
+      
+      pixmap = new Pixmap(Gdx.files.internal("data/background_color.png"));
+      ETC1.encodeImagePKM(pixmap).write(Gdx.files.local("background_color.etc1"));
+      
+      backgroundTexture = new Texture(Gdx.files.local("background_color.etc1"), true);
       backgroundTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
     }
     else
@@ -94,14 +103,14 @@ public class Assets
     splashScreenTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
 
     backgroundTexture2 = new Texture(Gdx.files.internal("data/background2.png"), true);
-    backgroundTexture2.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-
-    terrainTexture = new Texture(Gdx.files.internal("data/terrain4.jpg"), true);
-    terrainTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-    terrainTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
+    backgroundTexture2.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);    
 
     gasRegion1 = new TextureRegion(backgroundTexture2, 0, 0, 512, 512);
     gasRegion2 = new TextureRegion(backgroundTexture2, 512, 0, 256, 256);
+    
+    terrainTexture = new Texture(Gdx.files.local("terrain4.etc1"), false);
+    terrainTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+    terrainTexture.setFilter(Texture.TextureFilter.MipMapLinearNearest, Texture.TextureFilter.Linear);
 
     spaceshipRegion = new TextureRegion(gameObjectsTexture, 0, 0, 128, 128);
     canonRegion = new TextureRegion(gameObjectsTexture, 128, 0, 128, 128);

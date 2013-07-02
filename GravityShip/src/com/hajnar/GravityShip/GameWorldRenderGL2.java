@@ -205,7 +205,7 @@ public class GameWorldRenderGL2
     if (world.getState() == GameWorld.WORLD_RUNNING)
     {
       Vector2 cameraTranslation;
-      cameraTranslation = camera.followWithZooming(world.getPlayer());
+      cameraTranslation = camera.followWithZooming(world.getPlayer(), delta);
       parallaxCamera.translate(cameraTranslation.mul(0.1f));
       parallaxCamera2.translate(cameraTranslation.mul(0.3f));
     }

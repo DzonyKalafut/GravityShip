@@ -35,8 +35,8 @@ public class Player extends GameObject{
 
 	private Sprite sprite;	
 	
-	private int fuelAmmount;
-	private int lifeAmmount;	
+	private float fuelAmmount;
+	private float lifeAmmount;	
 	
 	public Player(World world,float x,float y) {
 		
@@ -92,14 +92,14 @@ public class Player extends GameObject{
 		
 	}
 	
-	public void consumeFuel()
+	public void consumeFuel(float delta)
 	{
-		fuelAmmount--;
+		fuelAmmount -= delta*60;
 	}
 	
-	public void refuel()
+	public void refuel(float delta)
 	{
-		fuelAmmount++;
+		fuelAmmount += delta*60;
 	}
 	
 	public void kill()
@@ -124,11 +124,11 @@ public class Player extends GameObject{
 		return sprite;
 	}
 
-	public int getFuelAmmount() {
+	public float getFuelAmmount() {
 		return fuelAmmount;
 	}
 
-	public int getLifeAmmount() {
+	public float getLifeAmmount() {
 		return lifeAmmount;
 	}
 

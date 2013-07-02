@@ -13,8 +13,8 @@ public class Main {
 		cfg.title = "GravityShip";
 		cfg.stencil = 0;
 		cfg.useGL20 = true;
-		cfg.useCPUSynch = false;
-		cfg.vSyncEnabled = false;
+//		cfg.useCPUSynch = false;
+		cfg.vSyncEnabled = true;
 		
 		if (args.length >= 2)
 		{

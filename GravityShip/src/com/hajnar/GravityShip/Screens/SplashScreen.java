@@ -31,6 +31,8 @@ public class SplashScreen  implements Screen, InputProcessor
     camera = new OrthographicCamera(1, Gdx.graphics.getHeight() / Gdx.graphics.getWidth());
     camera.update();
 	batch.setProjectionMatrix(camera.combined);
+	System.out.println(splashSprite.getWidth());
+	System.out.println(splashSprite.getHeight());
   }
 
   public void render(float delta)

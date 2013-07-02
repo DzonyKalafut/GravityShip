@@ -76,6 +76,12 @@ public class GravityShip extends Game
   public void render()
   {
     getScreen().render(Gdx.graphics.getDeltaTime());
+//    try {
+//		Thread.sleep(20);
+//	} catch (InterruptedException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
   }
 
   public void resize(int width, int height)

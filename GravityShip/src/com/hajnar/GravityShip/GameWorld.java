@@ -73,7 +73,7 @@ public class GameWorld {
 	private float firePauseDuration;    
 	private int startFuelAmmount;
 	private float canonsFireInterval;
-    
+ 
 	private Vector2 tmpVector;
     
 		
@@ -184,12 +184,12 @@ public class GameWorld {
 	{	
 		if (delta > 1/30f)
 			box2dWorld.step(1/30f, 4, 2);	
-		else
-			box2dWorld.step(delta, 4, 2);
+		else 
+			box2dWorld.step(delta, 4, 2);	
 		cleanUpDeadBodies();
 		updateBlackHoles(delta);
 		updateLandZones(delta);
-		updatePlayerShip();
+		updatePlayerShip(delta);
 		updateBullets();
 		updateParticles();
 		updateCanons();
@@ -304,7 +304,7 @@ public class GameWorld {
 		objectsToDestroy.clear();
 	}
 
-	public void updatePlayerShip()
+	public void updatePlayerShip(float delta)
 	{
 		player.update();
 		
@@ -318,7 +318,7 @@ public class GameWorld {
 					float x = -(float) Math.sin(angle) * 6;
 					float y = (float) Math.cos(angle) * 6;
 					player.getBody().applyForceToCenter(tmpVector.set(x,y));
-					player.consumeFuel();
+					player.consumeFuel(delta);
 				}
 				else
 					player.thrustOff();
@@ -334,11 +334,13 @@ public class GameWorld {
 			
 			if (player.getRotationRatio() > 0)
 			{
-				player.getBody().applyAngularImpulse(-0.13f*player.getRotationRatio());
+//				player.getBody().applyAngularImpulse(-0.13f*player.getRotationRatio());
+				player.getBody().applyAngularImpulse(-7.8f*delta*player.getRotationRatio());
+
 			}
 			if (player.getRotationRatio() < 0)
 			{
-				player.getBody().applyAngularImpulse(-0.13f*player.getRotationRatio());
+				player.getBody().applyAngularImpulse(-7.8f*delta*player.getRotationRatio());
 			}
 			
 		
@@ -349,7 +351,7 @@ public class GameWorld {
 						||  Math.toDegrees(player.getBody().getAngle()) % 360 > 350))
 				{
 					if (landedZoneType == LandingZone.ZONETYPE_REFUEL)
-						player.refuel();
+						player.refuel(delta);
 		
 					if (landedZoneType == LandingZone.ZONETYPE_FINISH)
 					{

@@ -54,10 +54,6 @@ public class GameScreen implements Screen, InputProcessor{
 	
 	Controller connectedController;
 	
-	private float accum = 0f;               
-	private final float step = 1f / 60f;    
-	private final float maxAccum = 1f / 20f;
-	
 	public GameScreen(Game game) 
 	{
 		Gdx.input.setInputProcessor(this);
@@ -107,13 +103,7 @@ public class GameScreen implements Screen, InputProcessor{
 		
 		if (gameWorld.getState() != GameWorld.WORLD_PAUSED)
 		{
-			accum += delta;                     
-			accum = Math.min(accum, maxAccum);  
-			while (accum > step) {   
-				gameWorld.update(delta);       
-			    accum -= step;                  
-			   }  
-//			gameWorld.update(delta);
+			gameWorld.update(delta);
 		}
 		
 		if (gameWorld.getState()  == GameWorld.WORLD_RUNNING)
@@ -191,7 +181,7 @@ public class GameScreen implements Screen, InputProcessor{
 		stringBuffer.append("Life: ").append(gameWorld.getPlayer().getLifeAmmount());
 		Assets.gameFont.draw(batch, stringBuffer , 5, Helper.FRUSTUM_HEIGHT - 5);
 		stringBuffer.delete(0, stringBuffer.length());
-		stringBuffer.append("Fuel: ").append(gameWorld.getPlayer().getFuelAmmount());
+		stringBuffer.append("Fuel: ").append(Math.round(gameWorld.getPlayer().getFuelAmmount()));
 		Assets.gameFont.draw(batch, stringBuffer, 5, Helper.FRUSTUM_HEIGHT - 40);
 		stringBuffer.delete(0, stringBuffer.length());
 		stringBuffer.append("Level ").append(GravityShip.prefs.getRecentWorld());

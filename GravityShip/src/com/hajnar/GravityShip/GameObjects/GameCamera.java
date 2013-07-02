@@ -53,7 +53,7 @@ public class GameCamera extends OrthographicCamera{
 		return cameraTranslation;
 	}
 	
-	public Vector2 followWithZooming(Player player)
+	public Vector2 followWithZooming(Player player, float delta)
 	{
 		Vector2 playerVelocity = player.getBody().getLinearVelocity();
 		float playerVelocityLen = playerVelocity.len();
@@ -72,9 +72,9 @@ public class GameCamera extends OrthographicCamera{
 		translate(cameraTranslation);
 		if (playerVelocityLen< 20)
 			if (playerVelocityBefore < playerVelocityLen && playerVelocityLen > 2)
-				changeZoom(0.0045f);
+				changeZoom(0.27f * delta);
 			else
-				changeZoom(-0.0045f);
+				changeZoom(-0.27f * delta);
 		playerVelocityBefore = playerVelocityLen;
 		return cameraTranslation;
 
