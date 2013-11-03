@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GravityShip/GravityShip.iml" filepath="$PROJECT_DIR$/GravityShip/GravityShip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GravityShip-android/GravityShip-android.iml" filepath="$PROJECT_DIR$/GravityShip-android/GravityShip-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GravityShip-desktop/GravityShip-desktop.iml" filepath="$PROJECT_DIR$/GravityShip-desktop/GravityShip-desktop.iml" />
+    </modules>
+  </component>
+</project>
+
