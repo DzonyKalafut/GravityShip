@@ -1,0 +1,352 @@
+{
+	"archiveVersion" = "1";
+	"classes" =
+		{
+		};
+	"objectVersion" = "46";
+	"objects" =
+		{
+			"100000000000000000000002" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("AC4BBA1FA9B5444AA03CBC79", "80836D17F2CF4E7CBDA5B2A9");
+					"sourceTree" = "<group>";
+				};
+			"100000000000000000000006" =
+				{
+					"isa" = "PBXNativeTarget";
+					"buildPhases" =
+						("100000000000000000000007");
+					"buildRules" =
+						();
+					"dependencies" =
+						();
+					"name" = "test";
+					"productName" = "test";
+					"productType" = "com.apple.product-type.application";
+				};
+			"100000000000000000000001" =
+				{
+					"isa" = "PBXProject";
+					"attributes" =
+						{
+							"LastUpgradeCheck" = "0620";
+						};
+					"buildConfigurationList" = "100000000000000000000003";
+					"compatibilityVersion" = "Xcode 3.2";
+					"developmentRegion" = "English";
+					"hasScannedForEncodings" = "0";
+					"knownRegions" =
+						("en");
+					"mainGroup" = "100000000000000000000002";
+					"projectDirPath" = "";
+					"projectRoot" = "";
+					"targets" =
+						("100000000000000000000006");
+				};
+			"100000000000000000000007" =
+				{
+					"isa" = "PBXSourcesBuildPhase";
+					"buildActionMask" = "2147483647";
+					"files" =
+						();
+					"runOnlyForDeploymentPostprocessing" = "0";
+				};
+			"100000000000000000000004" =
+				{
+					"isa" = "XCBuildConfiguration";
+					"buildSettings" =
+						{
+							"INFOPLIST_FILE" = "/Users/jaha/GravityShip/ios/Info.plist.xml";
+							"SDKROOT" = "iphoneos";
+							"TARGETED_DEVICE_FAMILY" = "1,2";
+							"GCC_PRECOMPILE_PREFIX_HEADER" = "YES";
+							"GCC_PREFIX_HEADER" = "/Users/jaha/GravityShip/ios/robovm-build/xcode/.ib/Prefix.pch";
+						};
+					"name" = "Debug";
+				};
+			"100000000000000000000005" =
+				{
+					"isa" = "XCBuildConfiguration";
+					"buildSettings" =
+						{
+							"INFOPLIST_FILE" = "/Users/jaha/GravityShip/ios/Info.plist.xml";
+							"SDKROOT" = "iphoneos";
+							"TARGETED_DEVICE_FAMILY" = "1,2";
+							"GCC_PRECOMPILE_PREFIX_HEADER" = "YES";
+							"GCC_PREFIX_HEADER" = "/Users/jaha/GravityShip/ios/robovm-build/xcode/.ib/Prefix.pch";
+						};
+					"name" = "Release";
+				};
+			"100000000000000000000003" =
+				{
+					"isa" = "XCConfigurationList";
+					"buildConfigurations" =
+						("100000000000000000000004", "100000000000000000000005");
+					"defaultConfigurationIsVisible" = "0";
+					"defaultConfigurationName" = "Release";
+				};
+			"AC4BBA1FA9B5444AA03CBC79" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("F41BDEC91BB24FF499CEF834", "28541650A1BC4699B477CC90", "77FBEFBFE5C844BCB1F4BCE2",
+ "BDAAF266676142C387BE61F9", "402679777E6F4EF2BDC399DD", "F37AE72FCFA4493095A7D757",
+ "6127A08A1BC14CF99557FE65", "7F5E8075BD294336A417298D", "CE775B9B6FF94293A1D33F42",
+ "71A9E9D43EC44029B77B1822", "5356FB35BDCB4C2BBCC3BA6F", "E3DD4F28F348493AB17EDE87"
+);
+					"name" = "Resources";
+					"sourceTree" = "<absolute>";
+					"path" = "/Users/jaha/GravityShip/ios/data";
+				};
+			"28541650A1BC4699B477CC90" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-375w-667h@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-375w-667h@2x.png";
+				};
+			"77FBEFBFE5C844BCB1F4BCE2" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-414w-736h@3x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-414w-736h@3x.png";
+				};
+			"BDAAF266676142C387BE61F9" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default-568h@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default-568h@2x.png";
+				};
+			"402679777E6F4EF2BDC399DD" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default.png";
+				};
+			"F37AE72FCFA4493095A7D757" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default@2x.png";
+				};
+			"6127A08A1BC14CF99557FE65" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default@2x~ipad.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default@2x~ipad.png";
+				};
+			"7F5E8075BD294336A417298D" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Default~ipad.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Default~ipad.png";
+				};
+			"CE775B9B6FF94293A1D33F42" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon-72.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon-72.png";
+				};
+			"71A9E9D43EC44029B77B1822" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon-72@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon-72@2x.png";
+				};
+			"5356FB35BDCB4C2BBCC3BA6F" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon.png";
+				};
+			"E3DD4F28F348493AB17EDE87" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Icon@2x.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "Icon@2x.png";
+				};
+			"13C9309CF6DB406DA286A9A0" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "Info.plist";
+					"explicitFileType" = "text.plist.info";
+					"sourceTree" = "<group>";
+					"path" = "Info.plist.xml";
+				};
+			"80836D17F2CF4E7CBDA5B2A9" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("13C9309CF6DB406DA286A9A0");
+					"name" = "Supporting Files";
+					"sourceTree" = "<absolute>";
+					"path" = "/Users/jaha/GravityShip/ios";
+				};
+			"7A4DF02B72AF4CC2BF783166" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "background.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "background.png";
+				};
+			"F41BDEC91BB24FF499CEF834" =
+				{
+					"isa" = "PBXGroup";
+					"children" =
+						("7A4DF02B72AF4CC2BF783166", "2A850229CD3C4A3C9AC0F436", "557DD95462B143DBBDBE1A45",
+ "8A86A1F01AF64F2295CEE682", "3381CA7582EF48E9BF90E8BA", "FD89360D920D4FC8976B64DF",
+ "A41D2F5F8304447DBB28AB6D", "E80B9EB04B594E14B7BD61CA", "7A76BAA2AC9D41FB9D1095A6",
+ "DD6F2D6476A94DAAB62D265F", "422EABB01DEC4230A0D9B584", "D0724527CE3E4DA6B01FBB5A",
+ "02A14B12BF3146EEA4672B39", "984BD9238D124F2BB075B463", "59BFF2CEEAB540F394AF9BB8",
+ "042DE012D767413EA7740026");
+					"name" = "data";
+					"sourceTree" = "<group>";
+					"path" = "data";
+				};
+			"2A850229CD3C4A3C9AC0F436" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "background2.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "background2.png";
+				};
+			"557DD95462B143DBBDBE1A45" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "background_color.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "background_color.png";
+				};
+			"8A86A1F01AF64F2295CEE682" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "game_objects.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "game_objects.png";
+				};
+			"3381CA7582EF48E9BF90E8BA" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "gamefont.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "gamefont.png";
+				};
+			"FD89360D920D4FC8976B64DF" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "menu_buttons.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "menu_buttons.png";
+				};
+			"A41D2F5F8304447DBB28AB6D" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "particle.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "particle.png";
+				};
+			"E80B9EB04B594E14B7BD61CA" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "splash_screen.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "splash_screen.png";
+				};
+			"7A76BAA2AC9D41FB9D1095A6" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain2.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain2.jpg";
+				};
+			"DD6F2D6476A94DAAB62D265F" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain3.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain3.jpg";
+				};
+			"422EABB01DEC4230A0D9B584" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain4.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain4.jpg";
+				};
+			"D0724527CE3E4DA6B01FBB5A" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain4.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "terrain4.png";
+				};
+			"02A14B12BF3146EEA4672B39" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain5.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain5.jpg";
+				};
+			"984BD9238D124F2BB075B463" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain6.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain6.jpg";
+				};
+			"59BFF2CEEAB540F394AF9BB8" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain7.jpg";
+					"lastKnownFileType" = "image.jpeg";
+					"sourceTree" = "<group>";
+					"path" = "terrain7.jpg";
+				};
+			"042DE012D767413EA7740026" =
+				{
+					"isa" = "PBXFileReference";
+					"name" = "terrain_texture.png";
+					"lastKnownFileType" = "image.png";
+					"sourceTree" = "<group>";
+					"path" = "terrain_texture.png";
+				};
+		};
+	"rootObject" = "100000000000000000000001";
+}
