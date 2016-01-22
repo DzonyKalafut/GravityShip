@@ -80,6 +80,7 @@ public class GameScreen implements Screen, InputProcessor {
         Assets.leftSprite.setPosition(Helper.FRUSTUM_WIDTH - 333, 20);
         Assets.rightSprite.setPosition(Helper.FRUSTUM_WIDTH - 190, 20);
         Assets.thrustSprite.setPosition(60, 20);
+        Assets.pauseSprite.setPosition(Helper.FRUSTUM_WIDTH / 2 - Assets.pauseSprite.getWidth(), Helper.FRUSTUM_HEIGHT - 110);
 
         Gdx.input.setCursorCatched(true);
 
@@ -182,6 +183,7 @@ public class GameScreen implements Screen, InputProcessor {
             Assets.leftSprite.draw(batch);
             Assets.rightSprite.draw(batch);
             Assets.thrustSprite.draw(batch);
+            Assets.pauseSprite.draw(batch);
         }
         batch.end();
     }
@@ -330,6 +332,9 @@ public class GameScreen implements Screen, InputProcessor {
                         gameWorld.getPlayer().setRotationRatio(-1);
                     if (Assets.rightSprite.getBoundingRectangle().contains(x, y))
                         gameWorld.getPlayer().setRotationRatio(1);
+                    if (Assets.pauseSprite.getBoundingRectangle().contains(x, y)) {
+                        gameWorld.pause();
+                    }
                 }
                 break;
             case GameWorld.WORLD_PAUSED:

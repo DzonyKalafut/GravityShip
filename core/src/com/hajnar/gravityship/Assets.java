@@ -66,6 +66,7 @@ public class Assets {
     public static String hiPassVertexShader;
     public static String hiPassFragmentShader;
     public static String blurFragmentShader;
+    public static Sprite pauseSprite;
 
     public static void loadAssets() {
         Pixmap pixmap = new Pixmap(Gdx.files.internal("data/terrain4.png"));
@@ -152,6 +153,7 @@ public class Assets {
         thrustSprite = new Sprite(buttonsTexture, 0, 513, 140, 140);
         leftSprite = new Sprite(buttonsTexture, 140, 513, 140, 140);
         rightSprite = new Sprite(buttonsTexture, 281, 513, 140, 140);
+        pauseSprite = new Sprite(buttonsTexture, 422, 513, 70, 70);
 
         gameFont = new BitmapFont(Gdx.files.internal("data/gamefont.fnt"), false);
         gameFont.setColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -160,11 +162,11 @@ public class Assets {
         music.setVolume(0.6F);
         music.setLooping(true);
 
-        buttonClickSound = Gdx.audio.newSound(Gdx.files.internal("data/buttonclick.ogg"));
-        thrustSound = Gdx.audio.newSound(Gdx.files.internal("data/thrust.ogg"));
-        hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.ogg"));
-        explosionSound = Gdx.audio.newSound(Gdx.files.internal("data/explosion.ogg"));
-        starPickupSound = Gdx.audio.newSound(Gdx.files.internal("data/star_pickup.ogg"));
+        buttonClickSound = Gdx.audio.newSound(Gdx.files.internal("data/buttonclick.mp3"));
+        thrustSound = Gdx.audio.newSound(Gdx.files.internal("data/thrust.mp3"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.mp3"));
+        explosionSound = Gdx.audio.newSound(Gdx.files.internal("data/explosion.mp3"));
+        starPickupSound = Gdx.audio.newSound(Gdx.files.internal("data/star_pickup.mp3"));
         thrustSoundInstace = -7L;
 
         terrainVertexShader = "attribute vec2 a_position; \nattribute vec2 a_texCoord0; \nuniform mat4 u_projectionViewMatrix; \nvarying vec2 v_texCoords;void main() \n{ \nv_texCoords = a_texCoord0; \ngl_Position = u_projectionViewMatrix * vec4(a_position, 0.0, 1.0); \n}";
